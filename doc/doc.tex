@@ -116,30 +116,10 @@
 \subsection{Schemat architektury}
 
 \begin{frame}
-	\begin{figure}
+    \begin{figure}
 		\centering
-		\begin{tikzpicture}[
-				rounded corners=2pt,
-				inner sep=5pt,
-				node distance=1.5cm,
-				text width=2.5cm,
-				align=center
-			]
-			
-			\node [draw] (user) {\textit{Użytkownik systemu}};
-			\node [draw,below=of user] (cli) {\textit{CLI}};
-			\node [draw,below=of cli] (database) {\textit{Baza wiedzy}};
-			\node [draw,left=.4cm of database] (fuzzy) {\textit{Moduł do wnioskowania rozmytego}};
-			\node [draw,right=.4cm of database] (rough) {\textit{Moduł do wnioskowania przybliżonego}};
-			
-			\draw [<->] (user) -- (cli);
-			\draw [<->] (cli) -- (fuzzy);
-			\draw [<->] (cli) -- (database);
-			\draw [<->] (cli) -- (rough);
-			\draw [<->] (database) -- (fuzzy);
-			\draw [<->] (database) -- (rough);
-		\end{tikzpicture}
-		\caption{\centering Schemat architektury systemu eksperckiego biura matrymonialnego}
+		\includegraphics[height=0.85\textheight,keepaspectratio]{images/diagram.png}
+		\caption{diagram z materiałów z wykładu}
 	\end{figure}
 	
 \end{frame}
@@ -153,9 +133,11 @@
 		
 		Zespół zaimplementuje:
 		\begin{itemize}
-			\item moduł wnioskowania przybliżonego - wyznaczający reguły decyzyjne w oparciu o teorię zbiorów przybliżonych
+		    \item moduł wnioskowania nierozmytego - wyznaczający reguły decyzyjne w oparciu o logikę boolowską
 			\item moduł wnioskowania rozmytego - wyznaczający reguły decyzyjne w oparciu o logikę rozmytą
 		\end{itemize}
+		
+		Każdy profil będzie zawierał cechy rozmyte (np. \textit{atrakcyjność}) i nierozmyte (np. \textit{płeć}). Użytkownik będzie określał swoje preferencje korzystając moduł użytkownika.
 	\end{block}
 
 \end{frame}
@@ -166,7 +148,7 @@
 		Osobny moduł będzie stanowiła baza wiedzy. Można podzielić ją na:
 		\begin{itemize}
 			\item część statyczną, z podstawowymi faktami i regułami na temat systemu
-			\item część dynamiczną, ładowaną z pliku lub modyfikowaną przez obsługującego
+			\item część dynamiczną, ładowaną z pliku lub modyfikowaną przez obsługującego (moduł eksperta)
 		\end{itemize}
 		Zespół przygotuje zarówno predykaty statycznej bazy wiedzy oraz interfejs do zarządzania dynamiczną bazą danych.
 	\end{block}
@@ -175,10 +157,27 @@
 
 \begin{frame}
 	
+	\begin{block}{Interfejs eksperta}
+		Prosty (tekstowy) interfejs eksperta. Będzie umożliwiał:  
+		\begin{itemize}
+		    \item interakcję z ekspertem
+		    \item dodawanie, usuwanie, edycję profili kandydatów
+		    \item sprawdzanie integralności danych w bazie
+		    \item serializacja danych
+		\end{itemize}
+	\end{block}
+
+\end{frame}
+
+\begin{frame}
+	
 	\begin{block}{Interfejs użytkownika}
-		Do aplikacji zostanie przygotowany prosty interfejs użytkownika. Będzie spoiwem łączącym wszystkie funkcjonalności systemu, tzn. będzie umożliwiał zarówno delegację zadań do modułu zarządzania bazą wiedzy oraz rozpoczęcie procesu wnioskowania na podstawie faktów podanych przez użytkownika. 
-		
-		Interfejs będzie umożliwiał komunikację za pomocą konsoli (tzw. CLI - \textit{ang. Command Line Interface}).
+		Prosty (tekstowy) interfejs użytkownika. Będzie umożliwiał:  
+		\begin{itemize}
+		    \item interakcję z użytkownikiem
+		    \item przeprowadzenie wnioskowania na podstawie wprowadzonych faktów
+		    \item zwrócenie użytkownikowi profili najbardziej pasujących osób
+		\end{itemize}
 	\end{block}
 
 \end{frame}
@@ -189,20 +188,67 @@
 
 \begin{frame}
 
+	\begin{block}{Przykłady pytań rozmytych}
+		\begin{itemize}
+		    \item Wiek
+	        \item Wzrost
+            \item Lokalizacja
+            \item Zainteresowania
+            \item Atrakcyjność
+            \item Gust muzyczny/filmowy/książkowy
+            \item Marzenia/aspiracje
+            \item Dochody
+		\end{itemize}
+	\end{block}
+
 \end{frame}
 
-\subsection{Przykłady reguł w systemie}
-
 \begin{frame}
+
+	\begin{block}{Przykłady pytań nierozmytych}
+		\begin{itemize}
+		    \item Wykształcenie
+            \item Płeć
+            \item Orientacja seksualna
+            \item Zawód
+            \item Religia
+		\end{itemize}
+	\end{block}
 
 \end{frame}
 
 \subsection{Przykład działania programu}
 
 \begin{frame}
+    \begin{block}{Wprowadzona kwerenda}
+		\begin{itemize}
+		    \item Humanista (z wykształcenia)
+		    \item Nie informatyk (zawód)
+            \item Mężczyzna
+            \item Około 0.75 atrakcyjności
+            \item Młody (ok. 25 lat)
+		\end{itemize}
+	\end{block}
+   
+	\begin{figure}
+		\centering
+		\includegraphics[height=0.3\textheight,keepaspectratio]{images/biuro-kiedys.jpg}
+		\caption{Kadr z serialu ``Jan Serce``}
+	\end{figure}
 
 \end{frame} 
 
+\begin{frame}
+
+	\begin{block}{Przykładowy wynik}
+		\begin{itemize}
+		    \item 0.99 Marcel (wyk. filozofia, psycholog, 26 lat, 0.95 atrakcyjności)
+		    \item 0.8 Michał (wyk. polityka, polityk, 29 lat,  0.99 atrakcyjność)
+            \item 0.6 Stefan (wyk. politologia, data scientist, 20 lat, 0.6 atrakcyjności)
+            \item 0.55 Józek (wyk. pedagogika, nauczyciel j. polskiego, 32 lata, 0.5 atrakcyjności)
+		\end{itemize}
+	\end{block}
+
+\end{frame}
+
 \end{document}
-
-
