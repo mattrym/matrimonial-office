@@ -1,0 +1,3 @@
+:- dynamic person/5.
+
+
