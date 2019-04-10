@@ -1,4 +1,4 @@
-:- consult('reasoning_engine.pl').
+:- consult('reasoning.pl').
 
 main :-
     format('### Matrimonial office - user interface ###~n'),

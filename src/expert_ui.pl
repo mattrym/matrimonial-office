@@ -1,4 +1,4 @@
-:- consult('user_database.pl').
+:- consult('database.pl').
 
 main :-
     format('### Matrimonial office - expert interface ###~n'),
@@ -91,7 +91,7 @@ print_all :-
 
 save_people :-
     format('# Saving changes...~n'),
-    tell('user_database.pl'),
+    tell('database.pl'),
     listing(person),
     told,
     format('# Changes saved~n').
