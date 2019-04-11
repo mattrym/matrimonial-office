@@ -1,6 +1,6 @@
 :- consult('database.pl').
 
-:- dynamic(fit/2).
+:- dynamic(result/2).
 :- dynamic(progress/2).
 
 start_reasoning.
