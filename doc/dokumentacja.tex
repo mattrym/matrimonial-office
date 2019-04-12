@@ -1,0 +1,82 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage[polish]{babel}
+\usepackage{hyperref}
+\usepackage[paper=a4paper,margin=1in]{geometry}
+\usepackage{tabularx} 
+\usepackage{helvet}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{algpseudocode}
+\usepackage{tikz}
+\usepackage{tkz-graph}
+\usepackage{listings,xcolor}
+\renewcommand{\familydefault}{\sfdefault}
+\setlength{\parindent}{0pt}
+\newtheorem{theorem}{Twierdzenie}
+\newtheorem{lemma}{Lemat}
+\newtheorem{conculsion}{Wniosek}
+
+\begin{document}
+\begin{titlepage}
+\newgeometry{top=1in,bottom=1in,right=1.5in,left=1.5in}
+\begin{center}
+{\fontsize{14}{12}\selectfont Wydział Matematyki i Nauk Informacyjnych Politechniki Warszawskiej}
+
+\end{center}
+
+\vspace{1cm}
+\begin{center}
+\includegraphics[width=0.3\textwidth]{images/logo.png}
+\end{center}
+\vspace{3cm}
+
+\begin{center}
+\textbf{{\fontsize{26}{12}\selectfont Systemy ekspertowe}}
+
+\vspace{2cm}
+\textbf{{\fontsize{22}{12}\selectfont Dokumentacja projektowa}}
+\vspace{1cm}
+
+\textbf{{\fontsize{13.5}{12}\selectfont Aleksandra~Bułka, Aleksandra~Byczyńska Jakub~Czyżniejewski, Mateusz~Rymuszka}}
+
+\vspace{6cm}
+\textbf{{\fontsize{13.5}{12}\selectfont \today}}
+\end{center}  
+\end{titlepage}
+
+{\fontsize{13.5}{12}\selectfont
+\tableofcontents
+\vspace{1cm}
+{\renewcommand{\arraystretch}{2.0}
+
+\newpage
+
+\section{Wprowadzenie i opis problemu}
+
+% TODO: to w sumie przekopiować z prezentacji w dużym stopniu, plus to tego może jakieś przykłady?
+
+\section{Szczegóły techniczne}
+
+% TODO: dwa zdania o niczym
+
+\subsection{Technologia}
+
+% TODO: coś tam o prologu napisać i tej implementacji SWI
+
+\subsection{Struktura}
+	
+% TODO: opisać strukturę, w jaki sposób dane są uniezależnione od interfejsów, itp. jakiś schemacik może?
+	
+\subsection{Szczegóły implementacyjne}
+
+% TODO: kilka podrozdziałów opisujących co się dzieje, pewnie co nieco o logice klasycznej, rozmytościach, w jaki sposób jest to wszystko liczone i potem prezentowane
+
+\section{Instrukcja użytkowania}
+
+% TODO: tutaj parę screenów, opisać co do czego, przykłady użycia itp.
+	
+\end{document}
