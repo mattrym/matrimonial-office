@@ -22,7 +22,7 @@ $ swipl expert_ui.pl
 
 Run user interface (used to reason about the perfect match to the user):
 ```bash
-swipl expert_ui.pl
+swipl user_ui.pl
 ?- main.
 ```
 ### Final notes
