@@ -67,3 +67,9 @@ person_feature(2, orientation, heterosexual).
 person_feature(3, orientation, heterosexual).
 person_feature(4, orientation, heterosexual).
 person_feature(5, orientation, homosexual).
+
+person_feature(1, (family, work, hobbies, travelling, wellness, spirituality, partying, development), (5, 5, 5, 1, 3, 3, 1, 4)).
+person_feature(2, (family, work, hobbies, travelling, wellness, spirituality, partying, development), (3, 5, 3, 4, 5, 1, 5, 5)).
+person_feature(3, (family, work, hobbies, travelling, wellness, spirituality, partying, development), (4, 4, 2, 2, 2, 4, 4, 3)).
+person_feature(4, (family, work, hobbies, travelling, wellness, spirituality, partying, development), (1, 2, 3, 1, 4, 1, 5, 1)).
+person_feature(5, (family, work, hobbies, travelling, wellness, spirituality, partying, development), (4, 5, 2, 2, 5, 3, 3, 4)).

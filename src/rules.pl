@@ -12,6 +12,7 @@ feature(education, 'Education').
 feature(occupation, 'Occupation').
 feature(religion, 'Religion').
 feature(orientation, 'Sexual orientation').
+feature((family, work, hobbies, travelling, wellness, spirituality, partying, development), 'Life priorities').
 
 % --------------------
 % features' properties
@@ -28,6 +29,9 @@ feature_type(occupation, atom, [teacher, scientist, driver, doctor, programmer, 
     comedian, writer, politician, model, architect, engineer, mechanic, designer, unemployed]).
 feature_type(religion, atom, [christian, jewish, hindu, muslim, buddhist, atheist, other]).
 feature_type(orientation, atom, [heterosexual, homosexual, bisexual, asexual, pansexual]).
+feature_type((family, work, hobbies, travelling, wellness, spirituality, partying, development), 
+(number, number, number, number, number, number, number, number), 
+([1, 5], [1, 5], [1, 5], [1, 5], [1, 5], [1, 5], [1, 5], [1, 5])).
 
 % ------------------------
 % questions about features
@@ -43,6 +47,8 @@ question(education, 'What level of education should he/she have?').
 question(occupation, 'What occupation should he/she have?').
 question(religion, 'What should his/her religious affiliation be?').
 question(orientation, 'What should be his/her sexual orientation').
+question((family, work, hobbies, travelling, wellness, spirituality, partying, development), 
+'How important (from 1 (not important) to 5 (very important) are the following life priorities to you: family, work, hobbies, travelling, wellness, spirituality, partying, self-development').
 
 % ---------------
 % score functions
@@ -96,3 +102,14 @@ score(occupation, _, _, 1).
 score(orientation, Answer, Value, 0) :-
     Answer \= Value, !.
 score(orientation, _, _, 1).
+
+score((family, work, hobbies, travelling, wellness, spirituality, partying, development), (FamilyAns, WorkAns, HobbiesAns, TravellingAns, WellnessAns, SpiritualityAns, PartyingAns, DevelopmentAns), (FamilyVal, WorkVal, HobbiesVal, TravellingVal, WellnessVal, SpiritualityVal, PartyingVal, DevelopmentVal), Score) :-
+    Score is max(0, 1 - ((abs(FamilyAns - FamilyVal) + 
+                        abs(WorkAns - WorkVal) +
+                        abs(FamilyAns - FamilyVal) + 
+                        abs(HobbiesAns - HobbiesVal) +
+                        abs(TravellingAns - TravellingVal) +
+                        abs(WellnessAns - WellnessVal) +
+                        abs(SpiritualityAns - SpiritualityVal) +
+                        abs(PartyingAns - PartyingVal) +
+                        abs(DevelopmentAns - DevelopmentVal)) / 16)).
