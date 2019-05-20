@@ -33,7 +33,7 @@ list_menu_options :-
 list_menu_options :- !.
 
 choose_menu_option :-
-    write('Action '), read(Index), nl, !,
+    write('Action '), read_number(Index), nl, !,
     search_action(Index, Action),
     Action,
     maybe_quit(Action).
@@ -57,17 +57,44 @@ field(1, id, 'ID').
 field(2, name, 'Name').
 field(3, surname, 'Surname').
 
+read_string(Value) :-
+    read_string(user_input, "\n", "\n", _, Value).
+
+read_number(Value) :-
+    read_string(user_input, "\n", "\n", _, StringValue),
+    atom_number(StringValue, Value).
+
+read_atom(Value) :-
+    read_string(user_input, "\n", "\n", _, StringValue),
+    atom_string(Value, StringValue).
+
 get_field(FieldName, FieldValue) :-
-    format('  ~s', [FieldName]), read(FieldValue).
+    format('  ~s~n', [FieldName]), 
+    read_string(FieldValue).
+
+get_field(FieldName, FieldValue, Type) :-
+    format('  ~s~n', [FieldName]), 
+    (
+        =(Type, number), read_number(FieldValue);
+        =(Type, string), read_string(FieldValue);
+        =(Type, atom), read_atom(FieldValue)
+    ).
 
 get_all_info(Id, Name, Surname) :-
-    get_field('ID', Id),
+    get_field('ID', Id, number),
     get_field('Name', Name),
     get_field('Surname', Surname).
 
-print_features :-
+print_features([]).
+print_features([Feature | Features]) :-
     feature(Feature, Description),
     format("~p ~\`.t~20| ~s~n", [Feature, Description]),
+    print_features(Features).
+
+print_features :-
+    findall(Feature, feature(Feature, _), Features),
+    sort(Features, SortedFeatures),
+    print_features(SortedFeatures),
     fail.
 print_features :- !.
 
@@ -76,11 +103,19 @@ print_header :-
     format('|~s~t~5||~s~t~26||~s~t~57||~n', 
         ['Id', 'Name', 'Surname']),
     format('~`-t~58|~n').
-    
-print_people :-
+
+print_people([]).
+print_people([Id|Ids]) :-
     person_info(Id, Name, Surname),
     print_person(Id, Name, Surname),
+    print_people(Ids).
+
+print_people :-
+    findall(Id, person_info(Id, _, _), Ids),
+    sort(Ids, SortedIds),
+    print_people(SortedIds),
     fail.
+
 print_people :-
     format('~`-t~58|~n').
 
@@ -93,9 +128,16 @@ print_person_info(Id) :-
     print_person_feature(name, Name),
     print_person_feature(surname, Surname).
 
+print_person_features(_, []).
+print_person_features(Id, [Feature | Features]) :-
+    person_feature(Id, Feature, FeatureValue),
+    print_person_feature(Feature, FeatureValue),
+    print_person_features(Id, Features).
+
 print_person_features(Id) :-
-    person_feature(Id, FeatureName, FeatureValue),
-    print_person_feature(FeatureName, FeatureValue),
+    findall(FeatureName, person_feature(Id, FeatureName, _), Features),
+    sort(Features, SortedFeatures),
+    print_person_features(Id, SortedFeatures),
     fail.
 print_person_features(_) :- !.
 
@@ -116,7 +158,7 @@ print_all :-
     print_people.
 
 print_one :-
-    format('# Select a person ID '), read(Id), nl,
+    format('# Select a person ID ~n'), read_number(Id), nl,
     print_person_info(Id),
     print_person_features(Id).    
 
@@ -151,16 +193,15 @@ edit_person :-
 
 change_feature :-
     format('# Changing a feature ~n'),
-    get_field('# Select person ID: ', Id), nl,
+    get_field('# Select person ID: ', Id, number), nl,
     person_info(Id, _, _),
     
     format('# Choose feature to change from the following: ~n'),
     print_features,
-    get_field('# Select a feature: ', Feature), nl,
-
+    get_field('# Select a feature: ', Feature, atom), nl,
     feature_type(Feature, Type, Range),
     format('# Choose ~p from ~p~n', [Type, Range]),
-    get_field('# Select value ', Value), nl,
+    get_field('# Select value ', Value, Type), nl,
 
     remove_feature(Id, Feature),
     assert(person_feature(Id, Feature, Value)),
@@ -170,12 +211,12 @@ change_feature :-
 
 remove_feature :-
     format('# Removing a feature ~n'),
-    get_field('Person ID', Id), nl,
+    get_field('Person ID', Id, number), nl,
     person_info(Id, _, _),
 
     format('Choose feature to remove from the following: ~n'),
     print_features,
-    get_field('Feature ', Feature), nl,
+    get_field('Feature ', Feature, atom), nl,
     
     remove_feature(Id, Feature),
     format('# Successfully changed feature ~s for a person #~p~n', [Feature, Id]).
@@ -184,7 +225,7 @@ remove_feature :-
 
 remove_person :-
     format('# Removing a person ~n'),
-    get_field('Person ID', Id), nl,
+    get_field('Person ID', Id, number), nl,
     person_info(Id, _, _),
     retract(person_info(Id, _, _)),
     retractall(person_feature(Id, _, _)),

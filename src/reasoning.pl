@@ -34,7 +34,7 @@ get_answer(Feature, Answer) :-
 
 ask(Feature, Answer) :-
     question(Feature, Question),
-    write(Question), write(' '), read(Answer), nl,
+    writeln(Question), read(Answer), nl,
     assertz(progress(Feature, Answer)).
 
 clear_reasoning :-
