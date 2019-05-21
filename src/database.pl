@@ -5,78 +5,6 @@ person_info(2, 'Beata', 'Kozidrak').
 person_info(3, 'Cezary', 'Pazura').
 person_info(4, 'Dariusz', 'Michalczewski').
 person_info(5, 'Ellen', 'Degeneres').
-
-:- dynamic person_feature/3.
-
-person_feature(1, age, 41).
-person_feature(2, age, 58).
-person_feature(3, age, 56).
-person_feature(4, age, 50).
-person_feature(5, age, 61).
-
-person_feature(2, gender, female).
-person_feature(3, gender, male).
-person_feature(4, gender, male).
-person_feature(5, gender, female).
-
-person_feature(1, height, 170).
-person_feature(2, height, 159).
-person_feature(3, height, 185).
-person_feature(4, height, 184).
-person_feature(5, height, 171).
-
-person_feature(1, (lon, lat), (51, 19)).
-person_feature(2, (lon, lat), (51, 19)).
-person_feature(3, (lon, lat), (51, 19)).
-person_feature(4, (lon, lat), (51, 19)).
-person_feature(5, (lon, lat), (37, 95)).
-
-person_feature(1, attractiveness, 60).
-person_feature(2, attractiveness, 86).
-person_feature(3, attractiveness, 70).
-person_feature(4, attractiveness, 45).
-person_feature(5, attractiveness, 70).
-
-person_feature(1, income, 4470000).
-person_feature(2, income, 1650000).
-person_feature(3, income, 1000000).
-person_feature(4, income, 19300000).
-person_feature(5, income, 300000000).
-
-person_feature(1, education, secondary).
-person_feature(2, education, secondary).
-person_feature(3, education, academic).
-person_feature(4, education, secondary).
-person_feature(5, education, academic).
-
-person_feature(1, occupation, sportsman).
-person_feature(2, occupation, singer).
-person_feature(3, occupation, actor).
-person_feature(4, occupation, sportsman).
-person_feature(5, occupation, comedian).
-
-person_feature(1, religion, christian).
-person_feature(2, religion, atheist).
-person_feature(3, religion, christian).
-person_feature(4, religion, christian).
-person_feature(5, religion, atheist).
-
-person_feature(1, orientation, heterosexual).
-person_feature(2, orientation, heterosexual).
-person_feature(3, orientation, heterosexual).
-person_feature(4, orientation, heterosexual).
-person_feature(5, orientation, homosexual).
-
-person_feature(1, (family, work, hobbies, travelling, wellness, spirituality, partying, development), (5, 5, 5, 1, 3, 3, 1, 4)).
-person_feature(2, (family, work, hobbies, travelling, wellness, spirituality, partying, development), (3, 5, 3, 4, 5, 1, 5, 5)).
-person_feature(3, (family, work, hobbies, travelling, wellness, spirituality, partying, development), (4, 4, 2, 2, 2, 4, 4, 3)).
-person_feature(4, (family, work, hobbies, travelling, wellness, spirituality, partying, development), (1, 2, 3, 1, 4, 1, 5, 1)).
-person_feature(5, (family, work, hobbies, travelling, wellness, spirituality, partying, development), (4, 5, 2, 2, 5, 3, 3, 4)).
-
-% ----------------
-% Generated people
-% ----------------
-
 person_info(6, 'Manual', 'Peachey').
 person_info(7, 'Roland', 'Dunton').
 person_info(8, 'Suzanna', 'Rooney').
@@ -128,6 +56,13 @@ person_info(53, 'Jo', 'Mccuin').
 person_info(54, 'Lasonya', 'Fosdick').
 person_info(55, 'Cleta', 'Crapo').
 
+:- dynamic person_feature/3.
+
+person_feature(1, age, 41).
+person_feature(2, age, 58).
+person_feature(3, age, 56).
+person_feature(4, age, 50).
+person_feature(5, age, 61).
 person_feature(6, age, 94).
 person_feature(7, age, 62).
 person_feature(8, age, 40).
@@ -179,6 +114,11 @@ person_feature(53, age, 70).
 person_feature(54, age, 69).
 person_feature(55, age, 48).
 
+person_feature(1, gender, male).
+person_feature(2, gender, female).
+person_feature(3, gender, male).
+person_feature(4, gender, male).
+person_feature(5, gender, female).
 person_feature(6, gender, female).
 person_feature(7, gender, male).
 person_feature(8, gender, female).
@@ -230,6 +170,11 @@ person_feature(53, gender, male).
 person_feature(54, gender, male).
 person_feature(55, gender, female).
 
+person_feature(1, height, 170).
+person_feature(2, height, 159).
+person_feature(3, height, 185).
+person_feature(4, height, 184).
+person_feature(5, height, 171).
 person_feature(6, height, 185).
 person_feature(7, height, 149).
 person_feature(8, height, 186).
@@ -281,6 +226,11 @@ person_feature(53, height, 138).
 person_feature(54, height, 240).
 person_feature(55, height, 223).
 
+person_feature(1, (lon, lat), (51, 19)).
+person_feature(2, (lon, lat), (51, 19)).
+person_feature(3, (lon, lat), (51, 19)).
+person_feature(4, (lon, lat), (51, 19)).
+person_feature(5, (lon, lat), (37, 95)).
 person_feature(6, (lon, lat), (58, 65)).
 person_feature(7, (lon, lat), (130, 25)).
 person_feature(8, (lon, lat), (144, 8)).
@@ -332,6 +282,11 @@ person_feature(53, (lon, lat), (86, 4)).
 person_feature(54, (lon, lat), (69, 41)).
 person_feature(55, (lon, lat), (142, 70)).
 
+person_feature(1, attractiveness, 60).
+person_feature(2, attractiveness, 86).
+person_feature(3, attractiveness, 70).
+person_feature(4, attractiveness, 45).
+person_feature(5, attractiveness, 70).
 person_feature(6, attractiveness, 53).
 person_feature(7, attractiveness, 55).
 person_feature(8, attractiveness, 27).
@@ -383,6 +338,11 @@ person_feature(53, attractiveness, 88).
 person_feature(54, attractiveness, 72).
 person_feature(55, attractiveness, 37).
 
+person_feature(1, income, 4470000).
+person_feature(2, income, 1650000).
+person_feature(3, income, 1000000).
+person_feature(4, income, 19300000).
+person_feature(5, income, 300000000).
 person_feature(6, income, 723199420).
 person_feature(7, income, 408258879).
 person_feature(8, income, 672845178).
@@ -434,6 +394,11 @@ person_feature(53, income, 177828556).
 person_feature(54, income, 55004777).
 person_feature(55, income, 787497776).
 
+person_feature(1, education, secondary).
+person_feature(2, education, secondary).
+person_feature(3, education, academic).
+person_feature(4, education, secondary).
+person_feature(5, education, academic).
 person_feature(6, education, academic).
 person_feature(7, education, elementary).
 person_feature(8, education, secondary).
@@ -485,6 +450,11 @@ person_feature(53, education, academic).
 person_feature(54, education, academic).
 person_feature(55, education, academic).
 
+person_feature(1, occupation, sportsman).
+person_feature(2, occupation, singer).
+person_feature(3, occupation, actor).
+person_feature(4, occupation, sportsman).
+person_feature(5, occupation, comedian).
 person_feature(6, occupation, unemployed).
 person_feature(7, occupation, doctor).
 person_feature(8, occupation, driver).
@@ -536,6 +506,11 @@ person_feature(53, occupation, unemployed).
 person_feature(54, occupation, teacher).
 person_feature(55, occupation, mechanic).
 
+person_feature(1, religion, christian).
+person_feature(2, religion, atheist).
+person_feature(3, religion, christian).
+person_feature(4, religion, christian).
+person_feature(5, religion, atheist).
 person_feature(6, religion, buddhist).
 person_feature(7, religion, atheist).
 person_feature(8, religion, other).
@@ -587,6 +562,11 @@ person_feature(53, religion, muslim).
 person_feature(54, religion, hindu).
 person_feature(55, religion, muslim).
 
+person_feature(1, orientation, heterosexual).
+person_feature(2, orientation, heterosexual).
+person_feature(3, orientation, heterosexual).
+person_feature(4, orientation, heterosexual).
+person_feature(5, orientation, homosexual).
 person_feature(6, orientation, heterosexual).
 person_feature(7, orientation, pansexual).
 person_feature(8, orientation, asexual).
@@ -638,6 +618,11 @@ person_feature(53, orientation, bisexual).
 person_feature(54, orientation, homosexual).
 person_feature(55, orientation, asexual).
 
+person_feature(1, (family, work, hobbies, travelling, wellness, spirituality, partying, development), (5, 5, 5, 1, 3, 3, 1, 4)).
+person_feature(2, (family, work, hobbies, travelling, wellness, spirituality, partying, development), (3, 5, 3, 4, 5, 1, 5, 5)).
+person_feature(3, (family, work, hobbies, travelling, wellness, spirituality, partying, development), (4, 4, 2, 2, 2, 4, 4, 3)).
+person_feature(4, (family, work, hobbies, travelling, wellness, spirituality, partying, development), (1, 2, 3, 1, 4, 1, 5, 1)).
+person_feature(5, (family, work, hobbies, travelling, wellness, spirituality, partying, development), (4, 5, 2, 2, 5, 3, 3, 4)).
 person_feature(6, (family, work, hobbies, travelling, wellness, spirituality, partying, development), (4, 3, 1, 3, 2, 4, 5, 5)).
 person_feature(7, (family, work, hobbies, travelling, wellness, spirituality, partying, development), (5, 5, 3, 3, 4, 3, 1, 1)).
 person_feature(8, (family, work, hobbies, travelling, wellness, spirituality, partying, development), (1, 5, 4, 5, 1, 5, 2, 3)).
