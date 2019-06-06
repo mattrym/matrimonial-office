@@ -1,0 +1,102 @@
+\documentclass[12pt]{article}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{multirow}
+\usepackage{longtable}
+\usepackage{makecell}
+\usepackage{hyperref}
+\usepackage[margin=1in]{geometry}
+\usepackage{algorithmic}
+\usepackage[most]{tcolorbox}
+\definecolor{code}{RGB}{210, 210, 210}
+\geometry{margin=1in}
+
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+
+\newcommand{\currentVersion}{1.0}
+
+\usepackage{titlesec}
+
+\setcounter{secnumdepth}{4}
+
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\begin{document}
+\begin{titlepage}
+		\centering
+		\includegraphics[scale=0.15]{logo_mini.png}
+		
+		{\scshape\LARGE Politechnika Warszawska \par}
+		{\scshape\Large Wydział Matematyki i Nauk Informacyjnych\par}
+		\vspace{1.5cm}
+		{\huge\bfseries \itshape Systemy Ekspertowe Biuro~matrymonialne\par}
+		\vspace{0.5cm}
+		{\Large \bfseries \itshape Raport do projektu\par}
+		\vspace{2cm}
+		{\Large\itshape Aleksandra Bułka\par}
+		\vspace{0.15cm}
+		{\Large\itshape Aleksandra Byczyńska\par}
+		\vspace{0.15cm}
+		{\Large\itshape Jakub Czyżniejewski\par}
+		\vspace{0.15cm}
+		{\Large\itshape Mateusz Rymuszka\par}
+		\vfill
+		wersja \currentVersion
+		\vfill
+		\today
+		\vfill
+	\end{titlepage}
+	\section{Cel projektu}
+	Celem projektu było zaprojektowanie i zaimplementowanie w języku Prolog systemu ekspertowego usprawniającego parowanie osób przez biuro matrymonialne. Parowanie miało odbywać się w oparciu o posiadaną wiedzę na temat cech i atrybutów klientów obecnych w bazie danych oraz w oparciu o odpowiedzi klienta prowadzącego interakcję z programem na pytania dotyczące jego preferencji. Zbieżność odpowiedzi klienta oraz cech osoby z bazy danych miały prowadzić do sparowania. Program został podzielony na 3 logiczne części: cześć użytkownika, w której klient wypowiada się na temat swoich preferencji, część administracyjna, w której zarządzający bazą danych użytkowników może edytować dane nt. klientów oraz część wnioskująca, w której zawarto reguły parowania użytkowników.
+	\section{Moduł użytkownika}
+Moduł użytkownika jest uruchamiany poprzez wywołanie kolejno \textbf{swipl ./src/user\_ui.pl} oraz \textbf{main.}.
+Interakcja z programem polega na odpowiadaniu na szereg pytań, których przykłady zamieszczono poniżej:
+	\begin{verbatim}
+	
+'What should be his/her age?'
+'What should be his/her gender?'
+'What should be his/her height?'
+'What location (lon, lat) should he/she be living in'
+'What should be his/her attractiveness level?'
+'What should be his/her income (yearly)?'
+'What level of education should he/she have?'
+'What occupation should he/she have?'
+'What should his/her religious affiliation be?'
+'What should be his/her sexual orientation'
+'How important (from 1 (not important) to 5 (very important) are the following 
+life priorities to you: family, work, hobbies, travelling,
+wellness, spirituality, partying, self-development'
+	\end{verbatim}
+
+Po przeprowadzeniu wywiadu z klientem, program wyświetla listę najlepiej dopasowanych osób z bazy danych wraz z podstawowymi informacjami na ich temat.
+	
+Niektóre z zadawanych pytań pozwalają jedynie na odpowiedzi TAK/NIE, jednak jest część pytań, np. pytanie o wiek, na które udzielona może być odpowiedź z pewnego zakresu wartości. Wprowadzenie tego typu pytań powoduje, że konieczne staje się pewne \textit{rozmycie} relacji dopasowania. Ostateczny wynik obliczania dopasowania dwóch osób to nie jest zatem \textbf{0} lub \textbf{1}, lecz raczej liczba rzeczywista z przedziału o tych krańcach.
+\newpage
+\section{Moduł wnioskowania}
+Odpowiedzialny za wyznaczenie stopnia dopasowania dwóch osób jest moduł wnioskowania. Jak już wspomniano, w ramach systemu funkcjonują 2 rodzaje pytań - zamknięte i \textit{rozmyte}. W przypadku pytań zamkniętych logika systemu jest prosta - dla osób, które nie są zgodne na poziomie pytań zamkniętych, dopasowanie wynosi 0, wpp. 1. Dla pytań \textit{rozmytych} natomiast, zdefiniowano w systemie dedykowane dla każdego atrybutu funkcje zbieżności wartości atrybutu $f: A \times A \rightarrow [0, 1]$. Każda z tych funkcji ma własność $f(x, x)=1$. Intuicyjnie - funkcja mówi jak bardzo dwie wartości tego argumentu są ze sobą zgodne i oczywiście dwie identyczne wartości muszą być ze sobą w pełni zgodne. Dopasowanie dwóch osób jest wyliczane jako iloczyn dopasowań poszczególnych par wartości atrybutów.
+\section{Moduł zarządzania}
+Moduł zarządzania bazą osób jest dostępny poprzez uruchomienie kolejno \textbf{swipl ./src/expert\_ui.pl} oraz \textbf{main.}
+Administrator ma dostęp z poziomu menu do szeregu trybów zarządzania bazą danych. Menu wygląda następująco:
+\begin{verbatim}
+### Matrimonial office - expert interface
+ Choose an action:
+  0. Quit program
+  1. Print all people from database
+  2. Print information about a single person
+  3. Save changes to database
+  4. Add a person to database
+  5. Edit a person from database
+  6. Remove a person from database
+  7. Remove all the people from database
+  8. Change feature of a person
+  9. Remove feature of a person
+\end{verbatim}
+Nazwy poszczególnych zakładek dobrze opisują ich funkcje. Przejść pomiędzy zakładkami dokonuje się poprzez podanie odpowiedniego numeru zakładki z klawiatury. Administrator ma możliwość edycji danych dowolnej osoby z bazy oraz jej usunięcia. Możliwe jest także dodawanie nowych osób oraz wyświetlanie pełnej listy osób lub szczegółów każdej osoby z osobna.
+\end{document}
